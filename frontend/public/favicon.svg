@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="trustpass" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#063d72"/>
+      <stop offset="55%" stop-color="#00a98f"/>
+      <stop offset="100%" stop-color="#22b879"/>
+    </linearGradient>
+  </defs>
+  <path d="M32 4 55 12v20c0 14-9.2 23.2-23 28C18.2 55.2 9 46 9 32V12L32 4Z" fill="url(#trustpass)"/>
+  <path d="M20 26h24v9H20zM27.5 26v25h9V26z" fill="white"/>
+  <path d="M11 32c2.5 10 12 15 28 15 9 0 16-2.5 21-7" fill="none" stroke="#19c28a" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="51" cy="13" r="3" fill="#18b994"/>
+  <circle cx="57" cy="20" r="3" fill="#18b994"/>
+  <circle cx="51" cy="27" r="3" fill="#18b994"/>
+</svg>

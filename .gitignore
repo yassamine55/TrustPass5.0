@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+
+# Uploaded files
+uploads/*
+!uploads/.gitkeep
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+backend/uploads/*
+tmp-upload-check.js

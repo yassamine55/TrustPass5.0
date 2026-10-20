@@ -1,0 +1,1 @@
+Repairer signatures are cryptographic verification only. The module does not assign or validate application roles. Callers provide a Hedera account ID, canonical payload, and signature; the module resolves the account public key from Mirror Node and verifies it with the Hedera SDK.

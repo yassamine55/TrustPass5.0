@@ -1,0 +1,42 @@
+{
+  "name": "reloop-passport-backend",
+  "version": "1.0.0",
+  "description": "ReLoop Passport backend - Node.js, Express, MongoDB, JWT and Hedera",
+  "main": "src/server.js",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "predev": "npm run build",
+    "start": "node src/server.js",
+    "prestart": "npm run build",
+    "seed:admin": "node src/seedAdmin.js",
+    "seed:demo": "npm run build && node src/seedDemoPassport.js",
+    "seed:marketplace": "node src/seedMarketplace.js",
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "demo:hedera": "tsx src/hedera/demo/testnetDemo.ts"
+  },
+  "dependencies": {
+    "@hashgraph/sdk": "^2.75.0",
+    "bcryptjs": "^3.0.2",
+    "canonicalize": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^18.0.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.0",
+    "multer": "^2.0.2",
+    "pdf-parse": "^2.4.5",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "nodemon": "^3.1.10",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^5.0.1"
+  }
+}

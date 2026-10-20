@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/public-sans";
+
+/* ---- Jetons de design : palette tirée de l'électronique (fibre de verre, dorure, code couleur des résistances) ---- */
+@theme {
+  --font-display: "Bricolage Grotesque Variable", "Public Sans Variable", system-ui, sans-serif;
+  --font-sans: "Public Sans Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+  --color-board: #e4e8ea;
+  --color-paper: #f9faf9;
+  --color-ink: #0f2230;
+  --color-ink-2: #465a68;
+  --color-line: #c7d0d5;
+  --color-line-2: #dbe1e4;
+  --color-petrol: #0f5c6b;
+  --color-petrol-dark: #0a4753;
+  --color-petrol-tint: #d7e8ea;
+  --color-gilt: #d4a62a;
+  --color-gilt-tint: #f5e9c4;
+  --color-gilt-ink: #7a5c08;
+  --color-ok: #1f6f45;
+  --color-ok-tint: #d5ebdf;
+  --color-fail: #b3312a;
+  --color-fail-tint: #f4d9d6;
+
+  --shadow-card: 0 1px 2px rgb(15 34 48 / 0.04), 0 12px 28px -12px rgb(15 34 48 / 0.16);
+  --shadow-lift: 0 1px 2px rgb(15 34 48 / 0.05), 0 24px 48px -18px rgb(15 34 48 / 0.28);
+  --shadow-panel: 0 1px 1px rgb(15 34 48 / 0.03), 0 8px 20px -16px rgb(15 34 48 / 0.22);
+
+  /* Code couleur : une bande par type d'événement */
+  --band-created: #1b2a35;
+  --band-purchased: #7b4b2a;
+  --band-resale: #e4832a;
+  --band-repair: #2f9b5b;
+  --band-maintenance: #3466d6;
+  --band-eol: #cf3b33;
+  --band-listed: #e6be2e;
+  --band-parts: #7c56b8;
+  --band-recycled: #8a949c;
+  --band-decom: #f4f4f0;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body { @apply bg-board text-ink font-sans antialiased; font-feature-settings: "tnum" 1; }
+  h1, h2, h3 { @apply font-display tracking-tight; }
+  :focus-visible { outline: 3px solid var(--color-petrol); outline-offset: 2px; border-radius: 4px; }
+  ::selection { background: var(--color-gilt-tint); }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 min-h-11 text-[0.95rem] font-semibold transition-all duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none; }
+  .btn-primary { @apply bg-petrol text-white shadow-[0_1px_2px_rgb(15_34_48/0.08),0_10px_20px_-10px_rgb(15_92_107/0.65)] hover:bg-petrol-dark hover:-translate-y-px active:translate-y-0; }
+  .btn-secondary { @apply bg-white text-ink border border-line hover:border-ink-2 hover:-translate-y-px active:translate-y-0; }
+  .btn-ghost { @apply text-ink hover:bg-ink/5; }
+  .btn-danger { @apply bg-fail text-white hover:bg-[#8f2721]; }
+  .btn-sm { @apply min-h-9 px-3 text-sm; }
+  .btn-lg { @apply min-h-[3.25rem] px-6 text-[1.02rem]; }
+  .input { @apply w-full min-h-11 rounded-lg border border-line bg-white px-3 text-[0.95rem] text-ink placeholder:text-ink-2/60 hover:border-ink-2 disabled:bg-board transition-shadow; }
+  .input:focus { @apply border-petrol; box-shadow: 0 0 0 3px rgb(15 92 107 / 0.14); }
+  textarea.input { @apply py-2 min-h-24; }
+  .panel { @apply bg-paper border border-line rounded-xl; box-shadow: var(--shadow-panel); }
+  .mono { font-family: var(--font-mono); font-size: 0.82em; letter-spacing: -0.01em; }
+  .link { @apply text-petrol underline decoration-petrol/30 underline-offset-2 hover:decoration-petrol; }
+  .card-lift { box-shadow: var(--shadow-card); }
+
+  /* Marketing surface: soft radial ink/petrol wash + fine dot grid, used behind the hero and CTA band. */
+  .surface-mesh {
+    position: relative;
+    background-color: var(--color-paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgb(15 34 48 / 0.08) 1px, transparent 0),
+      radial-gradient(60% 55% at 82% 8%, rgb(15 92 107 / 0.14), transparent 68%),
+      radial-gradient(45% 50% at 4% 92%, rgb(212 166 42 / 0.10), transparent 70%);
+    background-size: 22px 22px, auto, auto;
+  }
+  .text-balance { text-wrap: balance; }
+}
+
+/* Une seule animation orchestrée : les bandes se posent au chargement du passeport */
+@keyframes band-in { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+.band-in { transform-origin: center; transform-box: fill-box; animation: band-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 0.8s linear infinite; }
+dialog::backdrop { background: rgb(15 34 48 / 0.55); }
+dialog[open] { animation: pop 0.16s ease-out; }
+@keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .band-in, dialog[open], .spin { animation: none !important; }
+}
